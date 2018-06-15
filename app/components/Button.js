@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     height: 80,
     width: 80,
+    margin: 5,
   },
   text:{
     fontSize: 32,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   number: {
-    backgroundColor: 'dimgray',
+    backgroundColor: '#333',
   },
   operator: {
     backgroundColor: 'orange',
