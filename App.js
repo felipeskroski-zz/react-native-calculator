@@ -8,8 +8,6 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Button>1</Button>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
       </View>
     )
   }
