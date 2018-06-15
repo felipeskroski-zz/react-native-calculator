@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import Button from './app/components/Button'
 
-
+var {height, width} = Dimensions.get('window')
 export default class App extends React.Component {
   render() {
     return (
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    paddingBottom: width/50,
   },
   row:{
     flexDirection: 'row',

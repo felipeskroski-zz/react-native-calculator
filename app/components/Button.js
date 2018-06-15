@@ -4,7 +4,10 @@ import {
   TouchableHighlight,
   Text,
   View,
+  Dimensions,
 } from 'react-native'
+
+var {height, width} = Dimensions.get('window')
 
 const Button = ({ children, type="number", large}) => (
   <TouchableHighlight style={[styles.button, styles[type], large && styles.buttonLarge]}>
@@ -17,19 +20,19 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: 'orange',
-    padding: 20,
+    padding: 16,
     borderRadius: 100,
-    height: 80,
-    width: 80,
-    margin: 5,
+    height: width/5,
+    width: width/5,
+    margin: width/50,
   },
   buttonLarge:{
-    width: 165,
+    width: ((width/5)*2)+width/50,
     alignItems: 'flex-start',
-    paddingLeft: 30,
+    paddingLeft: 24,
   },
   text:{
-    fontSize: 32,
+    fontSize: 36,
     color: 'white'
   },
   blackText:{
