@@ -6,8 +6,8 @@ import {
   View,
 } from 'react-native'
 
-const Button = ({ children, type="number" }) => (
-  <TouchableHighlight style={[styles.button, styles[type]]}>
+const Button = ({ children, type="number", large}) => (
+  <TouchableHighlight style={[styles.button, styles[type], large && styles.buttonLarge]}>
    <Text style={[styles.text, (type==='utility') && styles.blackText]}>{children}</Text>
   </TouchableHighlight>
 )
@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     margin: 5,
+  },
+  buttonLarge:{
+    width: 165,
+    alignItems: 'flex-start',
+    paddingLeft: 30,
   },
   text:{
     fontSize: 32,

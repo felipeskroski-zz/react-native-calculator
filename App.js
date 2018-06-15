@@ -32,7 +32,7 @@ export default class App extends React.Component {
           <Button type='operator'>+</Button>
         </View>
         <View style={styles.row}>
-          <Button>0</Button>
+          <Button large>0</Button>
           <Button>.</Button>
           <Button type='operator'>=</Button>
         </View>
