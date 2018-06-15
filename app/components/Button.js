@@ -6,9 +6,9 @@ import {
   View,
 } from 'react-native'
 
-const Button = ({ children }) => (
-  <TouchableHighlight style={styles.button}>
-   <Text style={styles.text}>{children}</Text>
+const Button = ({ children, type="number" }) => (
+  <TouchableHighlight style={[styles.button, styles[type]]}>
+   <Text style={[styles.text, (type==='utility') && styles.blackText]}>{children}</Text>
   </TouchableHighlight>
 )
 
@@ -24,7 +24,20 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 32,
-  }
+    color: 'white'
+  },
+  blackText:{
+    color: 'black'
+  },
+  number: {
+    backgroundColor: 'dimgray',
+  },
+  operator: {
+    backgroundColor: 'orange',
+  },
+  utility: {
+    backgroundColor: 'lightgrey',
+  },
 })
 
 export default Button
