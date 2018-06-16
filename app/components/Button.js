@@ -9,9 +9,10 @@ import {
 
 var {height, width} = Dimensions.get('window')
 
-const Button = ({ children, type="number", large}) => (
+const Button = ({ children, type="number", large, onPress}) => (
   <TouchableHighlight
     underlayColor='white'
+    onPress={onPress}
     style={[styles.button, styles[type], large && styles.buttonLarge]}
     >
     <Text style={[styles.text, (type==='utility') && styles.blackText]}>
