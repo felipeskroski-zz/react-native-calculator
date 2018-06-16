@@ -53,7 +53,13 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.operator}>{this.state.operator}</Text>
-        <Text style={styles.result}>{this.state.display}</Text>
+        <Text
+          style={styles.result}
+          adjustsFontSizeToFit
+          numberOfLines={1}
+          minimumFontScale={0.5}>
+            {this.state.display}
+        </Text>
         <View style={styles.row}>
           <Button onPress={() => this.reset()} type='utility'>AC</Button>
           <Button type='utility'>+/-</Button>
