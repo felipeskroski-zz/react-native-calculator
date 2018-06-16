@@ -10,8 +10,13 @@ import {
 var {height, width} = Dimensions.get('window')
 
 const Button = ({ children, type="number", large}) => (
-  <TouchableHighlight style={[styles.button, styles[type], large && styles.buttonLarge]}>
-   <Text style={[styles.text, (type==='utility') && styles.blackText]}>{children}</Text>
+  <TouchableHighlight
+    underlayColor='white'
+    style={[styles.button, styles[type], large && styles.buttonLarge]}
+    >
+    <Text style={[styles.text, (type==='utility') && styles.blackText]}>
+      {children}
+    </Text>
   </TouchableHighlight>
 )
 

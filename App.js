@@ -7,6 +7,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.result}>0</Text>
         <View style={styles.row}>
           <Button type='utility'>AC</Button>
           <Button type='utility'>+/-</Button>
@@ -51,5 +52,13 @@ const styles = StyleSheet.create({
   },
   row:{
     flexDirection: 'row',
+  },
+  result:{
+    fontSize: 96,
+    textAlign: 'right',
+    color: 'white',
+    margin: 20,
+    fontWeight: '200',
+    alignSelf: 'stretch',
   }
 })
