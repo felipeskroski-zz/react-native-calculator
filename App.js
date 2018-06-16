@@ -49,10 +49,15 @@ export default class App extends React.Component {
       result: this.state.result/100,
     })
   }
+  plusMinus(){
+    this.setState({
+      display: this.state.display*-1,
+      result: this.state.result*-1,
+    })
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.operator}>{this.state.operator}</Text>
         <Text
           style={styles.result}
           adjustsFontSizeToFit
@@ -61,8 +66,10 @@ export default class App extends React.Component {
             {this.state.display}
         </Text>
         <View style={styles.row}>
-          <Button onPress={() => this.reset()} type='utility'>AC</Button>
-          <Button type='utility'>+/-</Button>
+          <Button onPress={() => this.reset()} type='utility'>
+            {this.state.display == 0 ? 'AC' : 'C'}
+          </Button>
+          <Button onPress={() => this.plusMinus()} type='utility'>+/-</Button>
           <Button onPress={() => this.percentage()} type='utility'>%</Button>
           <Button type='operator' onPress={() => this.setOperator('/')}>÷</Button>
         </View>

@@ -15,7 +15,11 @@ const Button = ({ children, type="number", large, onPress}) => (
     onPress={onPress}
     style={[styles.button, styles[type], large && styles.buttonLarge]}
     >
-    <Text style={[styles.text, (type==='utility') && styles.blackText]}>
+    <Text style={[
+      styles.text,
+      (type==='utility') && styles.blackText,
+      (type==='operator') && styles.operatorText,
+    ]}>
       {children}
     </Text>
   </TouchableHighlight>
@@ -38,11 +42,16 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
   },
   text:{
-    fontSize: 36,
-    color: 'white'
+    fontSize: 34,
+    color: 'white',
+    fontWeight: '400'
   },
   blackText:{
     color: 'black'
+  },
+  operatorText:{
+    fontSize: 40,
+    lineHeight: (width/5)-32,
   },
   number: {
     backgroundColor: '#333',
