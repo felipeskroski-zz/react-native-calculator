@@ -5,29 +5,59 @@ import Button from './app/components/Button'
 var {height, width} = Dimensions.get('window')
 export default class App extends React.Component {
   state = {
+    display: 0,
     result: 0,
     operator: null,
   }
-  setNumber(result) {
+  reset() {
+    this.setState({
+      display: 0,
+      result: 0,
+      operator: null,
+    })
+  }
+  setNumber(display) {
     if(this.state.operator){
-      let res = eval(this.state.result+this.state.operator+result)
-      this.setState({result:res, operator:null})
+      this.setState({
+        display:  display,
+        result: eval(this.state.result+this.state.operator+display),
+        operator:null
+      })
     }else{
-      this.setState({result})
+      let num
+      if(this.state.display == 0){
+        num = display
+      }else{
+        num = this.state.display+''+display
+      }
+      this.setState({
+        display:num,
+        result:num,
+      })
     }
   }
   setOperator(operator){
     this.setState({operator})
+    this.setResult()
+  }
+  setResult(){
+    this.setState({display: this.state.result})
+  }
+  percentage(){
+    this.setState({
+      display: this.state.display/100,
+      result: this.state.result/100,
+    })
   }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.operator}>{this.state.operator}</Text>
-        <Text style={styles.result}>{this.state.result}</Text>
+        <Text style={styles.result}>{this.state.display}</Text>
         <View style={styles.row}>
-          <Button type='utility'>AC</Button>
+          <Button onPress={() => this.reset()} type='utility'>AC</Button>
           <Button type='utility'>+/-</Button>
-          <Button type='utility'>%</Button>
+          <Button onPress={() => this.percentage()} type='utility'>%</Button>
           <Button type='operator' onPress={() => this.setOperator('/')}>÷</Button>
         </View>
         <View style={styles.row}>
@@ -49,9 +79,9 @@ export default class App extends React.Component {
           <Button type='operator' onPress={() => this.setOperator('+')}>+</Button>
         </View>
         <View style={styles.row}>
-          <Button large>0</Button>
-          <Button>.</Button>
-          <Button type='operator'>=</Button>
+          <Button onPress={() => this.setNumber(0)} large>0</Button>
+          <Button onPress={() => this.setNumber('.')}>.</Button>
+          <Button onPress={() => this.setResult()} type='operator'>=</Button>
         </View>
       </View>
     )
