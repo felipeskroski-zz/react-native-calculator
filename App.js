@@ -8,6 +8,7 @@ export default class App extends React.Component {
     display: 0,
     result: 0,
     operator: null,
+    console:null,
   }
   reset() {
     this.setState({
@@ -19,7 +20,7 @@ export default class App extends React.Component {
   setNumber(display) {
     if(this.state.operator){
       this.setState({
-        display:  display,
+        display: this.formatNumber(display),
         result: eval(this.state.result+this.state.operator+display),
         operator:null
       })
@@ -31,7 +32,7 @@ export default class App extends React.Component {
         num = this.state.display+''+display
       }
       this.setState({
-        display:num,
+        display: this.formatNumber(num),
         result:num,
       })
     }
@@ -55,9 +56,13 @@ export default class App extends React.Component {
       result: this.state.result*-1,
     })
   }
+  formatNumber(number){
+    return Number(number).toLocaleString()
+  }
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.operator}>{this.state.display}</Text>
         <Text
           style={styles.result}
           adjustsFontSizeToFit
@@ -122,5 +127,6 @@ const styles = StyleSheet.create({
   },
   operator:{
     color: 'white',
+    fontSize: 20,
   }
 })
