@@ -6,6 +6,8 @@ var {height, width} = Dimensions.get('window')
 export default class App extends React.Component {
   state = {
     display: 0,
+    number: 0,
+    memory: 0,
     result: 0,
     operator: null,
     console:null,
@@ -13,46 +15,58 @@ export default class App extends React.Component {
   reset() {
     this.setState({
       display: 0,
+      number: 0,
+      memory: 0,
       result: 0,
       operator: null,
     })
   }
-  setNumber(display) {
-    if(this.state.operator){
-      this.setState({
-        display: this.formatNumber(display),
-        result: eval(this.state.result+this.state.operator+display),
-        operator:null
-      })
+  setNumber(number) {
+    let num
+    if(this.state.number == 0){
+      num = number
     }else{
-      let num
-      if(this.state.display == 0){
-        num = display
-      }else{
-        num = this.state.display+''+display
-      }
-      this.setState({
-        display: this.formatNumber(num),
-        result:num,
-      })
+      num = this.state.number+''+number
     }
+    this.setState({
+      number: Number(num),
+      display: this.formatNumber(num)
+    })
   }
   setOperator(operator){
     this.setState({operator})
-    this.setResult()
+    this.setResult(operator)
   }
-  setResult(){
-    this.setState({display: this.state.result})
+  setResult(operator=null){
+    var num = eval(this.state.result+this.state.operator+this.state.number)
+    if(operator){
+
+      this.setState({
+        number: 0,
+        memory: this.state.number,
+        console: this.state.result+','+operator+','+this.state.number,
+        result: num,
+        display: this.formatNumber(num)
+      })
+    }else{
+      this.setState({
+        number: this.state.number,
+        console: this.state.number,
+        result: num,
+        display: this.formatNumber(num)
+      })
+    }
+
   }
   percentage(){
     this.setState({
-      display: this.state.display/100,
+      number: this.state.display/100,
       result: this.state.result/100,
     })
   }
   plusMinus(){
     this.setState({
-      display: this.state.display*-1,
+      number: this.state.display*-1,
       result: this.state.result*-1,
     })
   }
@@ -62,7 +76,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.operator}>{this.state.display}</Text>
+        <Text style={styles.operator}>{this.state.console}</Text>
+        <Text style={styles.operator}>{this.state.number}</Text>
         <Text
           style={styles.result}
           adjustsFontSizeToFit
