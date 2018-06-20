@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native'
 import Button from './app/components/Button'
 
 var {height, width} = Dimensions.get('window')
@@ -10,7 +10,6 @@ export default class App extends React.Component {
     memory: 0,
     result: 0,
     operator: null,
-    console:null,
   }
   reset() {
     this.setState({
@@ -21,6 +20,8 @@ export default class App extends React.Component {
       operator: null,
     })
   }
+  //TODO number + = shouldn't sum up
+
   setNumber(number) {
     let num
     if(this.state.number == 0){
@@ -29,7 +30,7 @@ export default class App extends React.Component {
       num = this.state.number+''+number
     }
     this.setState({
-      number: Number(num),
+      number: num,
       display: this.formatNumber(num)
     })
   }
@@ -38,20 +39,18 @@ export default class App extends React.Component {
     this.setResult(operator)
   }
   setResult(operator=null){
-    var num = eval(this.state.result+this.state.operator+this.state.number)
+    const num = eval(this.state.result+this.state.operator+Number(this.state.number))
     if(operator){
 
       this.setState({
         number: 0,
-        memory: this.state.number,
-        console: this.state.result+','+operator+','+this.state.number,
+        memory: Number(this.state.number),
         result: num,
         display: this.formatNumber(num)
       })
     }else{
       this.setState({
-        number: this.state.number,
-        console: this.state.number,
+        number: Number(this.state.number),
         result: num,
         display: this.formatNumber(num)
       })
@@ -59,15 +58,17 @@ export default class App extends React.Component {
 
   }
   percentage(){
+    const num = this.state.number/100
     this.setState({
-      number: this.state.display/100,
-      result: this.state.result/100,
+      number: num,
+      display: this.formatNumber(num),
     })
   }
   plusMinus(){
+    const num = this.state.number*-1
     this.setState({
-      number: this.state.display*-1,
-      result: this.state.result*-1,
+      number: num,
+      display: this.formatNumber(num),
     })
   }
   formatNumber(number){
@@ -76,8 +77,10 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.operator}>{this.state.console}</Text>
-        <Text style={styles.operator}>{this.state.number}</Text>
+        <StatusBar
+           backgroundColor="black"
+           barStyle="light-content"
+         />
         <Text
           style={styles.result}
           adjustsFontSizeToFit
